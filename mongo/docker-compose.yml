@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  mongo-db:
+    image: mongo
+    container_name: mongodb-container
+    ports:
+      - "27017:27017"
+    command: [--auth]
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_INITDB_DATABASE: study
+      MONGO_USERNAME: study
+      MONGO_PASSWORD: 123456
+    volumes:
+      - mongo_data:/data/mongo-db
+      - ./mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
+
+volumes:
+  mongo_data:
+    driver: local
